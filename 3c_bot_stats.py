@@ -67,6 +67,9 @@ for account in accounts:
 
     deals_sorted = sorted(deals, key=lambda botname: botname['bot_name'])
     prev_botname = ""
+    this_bot_sum = 0
+    this_bot_closed_sum = 0
+    this_bot_reserved_sum = 0
     for deal in deals_sorted:
         if deal['finished?'] == True:
             this_profitpst = str(deal['final_profit_percentage'])
@@ -80,26 +83,77 @@ for account in accounts:
         if me_want == "today":
             if str(date.today()) in str(deal['created_at']) or str(date.today()) in str(deal['closed_at']) or str(deal['closed_at']) == "None":
                 if deal['bot_name'] != prev_botname:
-                    print("--------------------------------")
+                    if this_bot_sum != 0:
+                        print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+                    this_bot_closed_sum = 0
+                    this_bot_reserved_sum = 0
+                    this_bot_sum = float(this_profitusd)
+                    if deal['finished?'] == True:
+                        this_bot_closed_sum = float(this_profitusd)
+                    elif deal['finished?'] == False:
+                        this_bot_reserved_sum = float(this_profitusd)
+
+                    print("----------------------------------------------------------------")
                     print("BotName: " + str(deal['bot_name']))
                     print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-11s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
                 else:
+                    this_bot_sum = float(this_profitusd) + this_bot_sum
+                    if deal['finished?'] == True:
+                        this_bot_closed_sum = float(this_profitusd) + this_bot_closed_sum
+                    elif deal['finished?'] == False:
+                        this_bot_reserved_sum = float(this_profitusd) + this_bot_reserved_sum
                     print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-11s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
+
+
         elif me_want == "all":
             if deal['bot_name'] != prev_botname:
-                print("--------------------------------")
+                if this_bot_sum != 0:
+                    print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+                this_bot_closed_sum = 0
+                this_bot_reserved_sum = 0
+                this_bot_sum = float(this_profitusd)
+                if deal['finished?'] == True:
+                    this_bot_closed_sum = float(this_profitusd)
+                elif deal['finished?'] == False:
+                    this_bot_reserved_sum = float(this_profitusd)
+
+                print("----------------------------------------------------------------")
                 print("BotName: " + str(deal['bot_name']))
                 print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-12s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
             else:
+                this_bot_sum = float(this_profitusd) + this_bot_sum
+                if deal['finished?'] == True:
+                    this_bot_closed_sum = float(this_profitusd) + this_bot_closed_sum
+                elif deal['finished?'] == False:
+                    this_bot_reserved_sum = float(this_profitusd) + this_bot_reserved_sum
                 print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-12s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
+
+
         else:
             if str(me_want) in str(deal['created_at']) or str(me_want) in str(deal['closed_at']):
                 if deal['bot_name'] != prev_botname:
-                    print("--------------------------------")
+                    if this_bot_sum != 0:
+                        print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+                    this_bot_closed_sum = 0
+                    this_bot_reserved_sum = 0
+                    this_bot_sum = float(this_profitusd)
+                    if deal['finished?'] == True:
+                        this_bot_closed_sum = float(this_profitusd)
+                    elif deal['finished?'] == False:
+                        this_bot_reserved_sum = float(this_profitusd)
+
+                    print("----------------------------------------------------------------")
                     print("BotName: " + str(deal['bot_name']))
                     print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-12s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
                 else:
+                    this_bot_sum = float(this_profitusd) + this_bot_sum
+                    if deal['finished?'] == True:
+                        this_bot_closed_sum = float(this_profitusd) + this_bot_closed_sum
+                    elif deal['finished?'] == False:
+                        this_bot_reserved_sum = float(this_profitusd) + this_bot_reserved_sum
                     print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-12s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
             
         prev_botname = deal['bot_name']
+    if this_bot_sum != 0:
+        print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
 
