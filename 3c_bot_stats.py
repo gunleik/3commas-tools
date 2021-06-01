@@ -23,8 +23,8 @@ else:
 
 # initiate API with key/secret from os env
 p3cw = Py3CW(
-    key=os.environ.get('threecommas_key'),
-    secret=os.environ.get('threecommas_secret'),
+    key=os.environ.get('threecommas_key').rstrip(),
+    secret=os.environ.get('threecommas_secret').rstrip(),
     request_options={
         'request_timeout': 10,
         'nr_of_retries': 1,
