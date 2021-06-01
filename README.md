@@ -9,6 +9,12 @@ Screenshot:<br>
 # requires python3 to be installed
 pip3 install py3cw
 git clone https://github.com/gunleik/3c-bot-stats.git
+
+# Windows
+# click "Code" and download zip, extract it somewhere on you windows computer
+# requires python3 to be installed https://www.python.org/downloads/
+# and in the PATH
+pip install py3cw 
 ```
 
 ## Generate API key
