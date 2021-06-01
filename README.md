@@ -20,6 +20,9 @@ git clone https://github.com/gunleik/3c-bot-stats.git
 # requires python3 to be installed https://www.python.org/downloads/
 # and in the PATH
 pip install py3cw 
+
+# Windows binary
+# If you trust this binary file and windows havent decided to block it yet as they often do with self extracting exe's, then you can try this one https://github.com/gunleik/binaries/raw/main/3c-bot-stats_extract.exe
 ```
 
 ## Generate API key
