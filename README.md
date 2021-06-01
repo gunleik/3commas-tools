@@ -10,7 +10,7 @@ git clone https://github.com/gunleik/3c-bot-stats.git
 ## Generate API key
 If not done already, you have to create an API key at https://3commas.io/api_access_tokens.
 It needs minimum "Account Read" and "Bots Read" access.
-The first time you run the script it will ask for you API key and secret.
+The first time you run the script it will ask for your API key and secret.
 The script will save it in $HOME/.3c_keys.
 If you like to change the API key/secret or wipe it from you system, just delete the $HOME/.3c_keys file.
 	
