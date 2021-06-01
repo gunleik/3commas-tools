@@ -49,6 +49,10 @@ error, accounts = p3cw.request(
     action=''
 )
 
+grandtotal_bot_sum = 0
+grandtotal_bot_closed_sum = 0
+grandtotal_bot_reserved_sum = 0
+
 for account in accounts:
     print()
     print('##########################################################################################')
@@ -70,6 +74,7 @@ for account in accounts:
     this_bot_sum = 0
     this_bot_closed_sum = 0
     this_bot_reserved_sum = 0
+    
     for deal in deals_sorted:
         if deal['finished?'] == True:
             this_profitpst = str(deal['final_profit_percentage'])
@@ -85,6 +90,9 @@ for account in accounts:
                 if deal['bot_name'] != prev_botname:
                     if this_bot_sum != 0:
                         print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+                        grandtotal_bot_sum = grandtotal_bot_sum + this_bot_sum
+                        grandtotal_bot_closed_sum = grandtotal_bot_closed_sum + this_bot_closed_sum
+                        grandtotal_bot_reserved_sum = grandtotal_bot_reserved_sum + this_bot_reserved_sum
                     this_bot_closed_sum = 0
                     this_bot_reserved_sum = 0
                     this_bot_sum = float(this_profitusd)
@@ -109,6 +117,9 @@ for account in accounts:
             if deal['bot_name'] != prev_botname:
                 if this_bot_sum != 0:
                     print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+                    grandtotal_bot_sum = grandtotal_bot_sum + this_bot_sum
+                    grandtotal_bot_closed_sum = grandtotal_bot_closed_sum + this_bot_closed_sum
+                    grandtotal_bot_reserved_sum = grandtotal_bot_reserved_sum + this_bot_reserved_sum
                 this_bot_closed_sum = 0
                 this_bot_reserved_sum = 0
                 this_bot_sum = float(this_profitusd)
@@ -134,6 +145,9 @@ for account in accounts:
                 if deal['bot_name'] != prev_botname:
                     if this_bot_sum != 0:
                         print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+                        grandtotal_bot_sum = grandtotal_bot_sum + this_bot_sum
+                        grandtotal_bot_closed_sum = grandtotal_bot_closed_sum + this_bot_closed_sum
+                        grandtotal_bot_reserved_sum = grandtotal_bot_reserved_sum + this_bot_reserved_sum
                     this_bot_closed_sum = 0
                     this_bot_reserved_sum = 0
                     this_bot_sum = float(this_profitusd)
@@ -155,5 +169,13 @@ for account in accounts:
             
         prev_botname = deal['bot_name']
     if this_bot_sum != 0:
-        print("BotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+        print("AAABotCompletedSum: " + str(format(this_bot_closed_sum, '.2f')) + " # Reserved: " + str(format(this_bot_reserved_sum, '.2f')) + " # IfPanicSellAll: " + str(format(this_bot_sum, '.2f')))
+        grandtotal_bot_sum = grandtotal_bot_sum + this_bot_sum
+        grandtotal_bot_closed_sum = grandtotal_bot_closed_sum + this_bot_closed_sum
+        grandtotal_bot_reserved_sum = grandtotal_bot_reserved_sum + this_bot_reserved_sum
 
+print()
+print('##########################################################################################')
+print("TotalCompleted : " + str(format(grandtotal_bot_closed_sum, '.2f')))
+print("TotalReserved  : " + str(format(grandtotal_bot_reserved_sum, '.2f')))
+print("TotalIfPanic   : " + str(format(grandtotal_bot_sum, '.2f')))
