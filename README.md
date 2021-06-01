@@ -1,5 +1,7 @@
 # 3c-bot-stats
 ## Python3 script for getting an overview of your deals
+Screenshot:<br>
+<img src="https://user-images.githubusercontent.com/2580262/120322376-a1558300-c2e4-11eb-990c-92296902fc9d.png" width=700>
 
 ## Installation
 ```
