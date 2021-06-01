@@ -27,7 +27,7 @@ If not done already, you have to create an API key at https://3commas.io/api_acc
 It needs minimum "Account Read" and "Bots Read" access.
 The first time you run the script it will ask for your API key and secret.
 The script will save it in $HOME/.3c_keys (or 3c_keys.bat on Windows).
-If you like to change the API key/secret or wipe it from you system, just delete the $HOME/.3c_keys file.
+If you like to change the API key/secret or wipe it from you system, just delete the $HOME/.3c_keys file (or 3c_keys.bat).
 	
 ## Run the script
 ```
