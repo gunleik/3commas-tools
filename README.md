@@ -24,6 +24,7 @@ If you like to change the API key/secret or wipe it from you system, just delete
 # today is default and can be omitted
 ./3c_bot_stats.sh today
 ./3c_bot_stats.sh
+# use 3c_bot_stats.bat on windows
 
 # show all deals (limit on 1000)
 ./3c_bot_stats.sh all
