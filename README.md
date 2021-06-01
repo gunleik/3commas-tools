@@ -2,7 +2,7 @@
 
 ## Python3 script for getting an overview of your 3Commas deals
 <p>I mostly use this to check the performance of different bots in my paper account. Which bots have earned the most today without gathering too many red bags?</p>
-<p>To change between real account and paper account use you browser to go to the 3c dashboard and change there. It is a global setting and will affect the account this script use.</p>
+<p>To change between real account and paper account use your browser to go to the 3c dashboard and change there. It is a global setting and will affect the account this script use.</p>
 <p>The script is a total hack and comes with no warranties. I recommend setting it up with a read only API key. Python is not my primary language either, but I start to like it :-)</p>
 
 Screenshot:<br>
