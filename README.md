@@ -36,6 +36,7 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ```
 
 ## Nice to know
+* Stop = None means that this is an active deal.
 * The use of paper account or real account is set globally on you account, so to use this script on paper account, go to 3commas web console and click paper account there. Then the script will automatically use the paper account and vice versa.
 
 ## Additional API info:
