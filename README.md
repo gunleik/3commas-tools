@@ -5,6 +5,7 @@ Screenshot:<br>
 
 ## Installation
 ```
+# requires python3 to be installed
 pip3 install py3cw
 git clone https://github.com/gunleik/3c-bot-stats.git
 ```
