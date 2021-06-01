@@ -1,7 +1,12 @@
 # 3c-bot-stats
-## Python3 script for getting an overview of your deals
+
+## Python3 script for getting an overview of your 3Commas deals
+<p>I mostly use this to check the performance of different bots in my paper account. Which bots have earned the most today without gathering too many red bags?</p>
+<p>To change between real account and paper account use your browser to go to the 3c dashboard and change there. It is a global setting and will affect the account this script use.</p>
+<p>The script is a total hack and comes with no warranties. I recommend setting it up with a read only API key. Python is not my primary language either, but I start to like it :-)</p>
+
 Screenshot:<br>
-<img src="https://user-images.githubusercontent.com/2580262/120322376-a1558300-c2e4-11eb-990c-92296902fc9d.png" width=700>
+<img src="https://user-images.githubusercontent.com/2580262/120374281-a97be580-c319-11eb-934c-eab07f47e6c0.png" width=700>
 
 ## Installation
 ```
@@ -21,8 +26,8 @@ pip install py3cw
 If not done already, you have to create an API key at https://3commas.io/api_access_tokens.
 It needs minimum "Account Read" and "Bots Read" access.
 The first time you run the script it will ask for your API key and secret.
-The script will save it in $HOME/.3c_keys.
-If you like to change the API key/secret or wipe it from you system, just delete the $HOME/.3c_keys file.
+The script will save it in $HOME/.3c_keys (or 3c_keys.bat on Windows).
+If you like to change the API key/secret or wipe it from you system, just delete the $HOME/.3c_keys file (or 3c_keys.bat).
 	
 ## Run the script
 ```
