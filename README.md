@@ -1,20 +1,20 @@
 # 3c-bot-stats
-# Python3 script for getting an overview of the bots
+## Python3 script for getting an overview of the bots
 
-# Installation
+## Installation
 ```
 pip3 install py3cw
 git clone https://github.com/gunleik/3c-bot-stats.git
 ```
 
-# Generate API key
+## Generate API key
 If not done already, you have to create an API key at https://3commas.io/api_access_tokens
 It needs minimum "Account Read" and "Bots Read" access.
 The first time you run the script it will ask for you API key and secret.
 The script will save it in $HOME/.3c_keys
 If you like to change the API key or secret or wipe it from you system, just delete the $HOME/.3c_keys file.
 	
-# Run the script
+## Run the script
 ```
 # filter on deals that have started, stopped today or is currently running
 # today is default and can be omitted
@@ -33,8 +33,7 @@ If you like to change the API key or secret or wipe it from you system, just del
 ./3c_bot_stats.sh 2021-05-31
 ```
 
-
-Additional API info:
-# 3c API info
-# https://github.com/3commas-io/3commas-official-api-docs
-# https://github.com/bogdanteodoru/py3cw
+## Additional API info:
+* 3c API info
+* https://github.com/3commas-io/3commas-official-api-docs
+* https://github.com/bogdanteodoru/py3cw
