@@ -3,3 +3,4 @@ win_binary/*.*
 win_binary/*.exe
 */win_binary/*.*
 */win_binary/*.exe
+*.exe
