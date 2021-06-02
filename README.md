@@ -22,8 +22,10 @@ git clone https://github.com/gunleik/3c-bot-stats.git
 pip install py3cw 
 
 # Windows binary
-# If you trust this binary file and windows havent decided to block it yet
-# as they often do with self extracting exe's, then you can try this one
+# I've made a Windows binary with Pyinstaller, so if you trust me
+# and windows havent decided to block it as they often do with
+# uncommon exe's, then you can try this one:
+# https://github.com/gunleik/binaries/blob/main/3c-bot-stats.zip or
 # https://github.com/gunleik/binaries/raw/main/3c-bot-stats_extract.exe
 ```
 
