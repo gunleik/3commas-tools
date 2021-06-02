@@ -1,3 +1,16 @@
+#################################################################
+#
+#   3commas bot stats
+#   giving a better overview of your deals in 3commas
+#
+#   https://github.com/gunleik/3c-bot-stats
+#
+#   @gunleik
+#
+#################################################################
+
+
+
 import time
 import sys
 import os
