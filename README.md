@@ -25,7 +25,7 @@ pip install py3cw
 # I've made a Windows binary with Pyinstaller, so if you trust me
 # and windows havent decided to block it as they often do with
 # uncommon exe's, then you can try this one:
-# https://github.com/gunleik/binaries/blob/main/3c-bot-stats.zip or
+# https://github.com/gunleik/binaries/raw/main/3c-bot-stats.zip or
 # https://github.com/gunleik/binaries/raw/main/3c-bot-stats_extract.exe
 ```
 
