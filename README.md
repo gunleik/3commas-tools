@@ -44,6 +44,9 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ./3c_bot_stats.sh
 # use 3c_bot_stats.bat on windows
 
+# show only active/running deals
+./3c_bot_stats.sh active
+
 # show all deals (limit on 1000)
 ./3c_bot_stats.sh all
 
