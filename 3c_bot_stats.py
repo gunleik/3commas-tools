@@ -94,7 +94,7 @@ for account in accounts:
             this_profitusd = str(format(float(deal['usd_final_profit']), '.2f'))
         elif deal['finished?'] == False:
             this_profitpst = str(deal['actual_profit_percentage'])
-            this_profitusd = str(format(float(deal['actual_profit']), '.2f'))
+            this_profitusd = str(format(float(deal['actual_usd_profit']), '.2f'))
         else:
             this_profit = "err"
 
