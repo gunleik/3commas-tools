@@ -77,27 +77,29 @@ error, balances = p3cw.request(
 )
 
 total_asset_percentage  = 0
+total_asset_to_rebalance_percentage = 0
 total_target_percentage = 0
 target_amount_in_usd    = 0
 action_to_market        = dict()
 
 
-print("Currently in account:")
-for this_asset in preferred_ratio:
-    asset_target_percent    = preferred_ratio[this_asset]
-    target_amount_in_usd= (float(account_amount_in_usd) * float(asset_target_percent)) / 100
-    dev_amount_in_usd   = float(target_amount_in_usd)
-    action_to_market[this_asset] = {'action': 'buy', 'amount': dev_amount_in_usd}
+print("Currently in account:", end = ' ')
+print(str(account['name']))
 
-    for balance in balances:
-        asset_currency  = balance['currency_code']
-        if asset_currency == this_asset:
-            asset_amount_in_asset   = float(balance['position'])
-            asset_amount_in_usd     = float(balance['usd_value'])
-            asset_amount_percent    = format(balance['percentage'], '.2f')
-        
+for balance in balances:
+    asset_currency          = balance['currency_code']
+    asset_amount_in_asset   = float(balance['position'])
+    asset_amount_in_usd     = float(balance['usd_value'])
+    asset_amount_percent    = format(balance['percentage'], '.2f')
+    
+    try:
+        asset_target_percent    = preferred_ratio[asset_currency]
+        if asset_currency in preferred_ratio:
             asset_target_percent_min= float(preferred_ratio[asset_currency]) - float(allowed_deviation)
             asset_target_percent_max= float(preferred_ratio[asset_currency]) + float(allowed_deviation)
+            target_amount_in_usd    = (float(account_amount_in_usd) * float(asset_target_percent)) / 100
+            dev_amount_in_usd       = float(target_amount_in_usd)
+            action_to_market[asset_currency] = {'action': 'buy', 'amount': dev_amount_in_usd}
             
             if float(asset_amount_percent) < float(asset_target_percent_min):
                 balance_action      = "buy"
@@ -108,13 +110,13 @@ for this_asset in preferred_ratio:
                 balance_action      = "sell"
                 target_amount_in_usd= (float(account_amount_in_usd) * float(asset_target_percent)) / 100
                 dev_amount_in_usd   = float(asset_amount_in_usd) - float(target_amount_in_usd)
-
+    
             else:
                 balance_action      = "none"
                 action_amount_cur   = 0
                 target_amount_in_usd= (float(account_amount_in_usd) * float(asset_target_percent)) / 100
                 dev_amount_in_usd   = 0
-
+    
             
             if asset_currency == market_currency:
                 balance_action      = "m-" + balance_action
@@ -126,8 +128,8 @@ for this_asset in preferred_ratio:
             
             
             
-            print("Account: " + str(account['name']), end = ' ')
-            print("# " + '%-6s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
+            #print("Account: " + str(account['name']), end = ' # ')
+            print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
             print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
             print("# Ratio:" + '%6s' % str(asset_amount_percent), end = '% ')
             print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + "($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
@@ -135,15 +137,26 @@ for this_asset in preferred_ratio:
             print("# Amount: $" + str(format(dev_amount_in_usd, '.2f')))
             
             total_asset_percentage = float(total_asset_percentage) + float(asset_amount_percent)
+            total_asset_to_rebalance_percentage = float(total_asset_to_rebalance_percentage) + float(asset_amount_percent)
             total_target_percentage = float(total_target_percentage) + float(asset_target_percent)
-
+    except:
+        asset_currency          = balance['currency_code']
+        asset_amount_in_asset   = float(balance['position'])
+        asset_amount_in_usd     = float(balance['usd_value'])
+        asset_amount_percent    = format(balance['percentage'], '.2f')
+        total_asset_percentage  = float(total_asset_percentage) + float(asset_amount_percent)
+        #print("Account: " + str(account['name']), end = ' # ')
+        print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
+        print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
+        print("# Ratio:" + '%6s' % str(format(total_asset_percentage, '.2f')) + "%", end = ' ')
+        print("# Action: n/a")
 
 
 print("-------------------------------------------------------------------------------------------------------------------------------------")
-print("Account: " + str(account['name']), end = ' ')
-print("# " '%-5s' % "---:     --------", end = ' ')
+#print("Account: " + str(account['name']), end = ' # ')
+print('%-8s' % "---:       --------", end = ' ')
 print("# USD:" + '%10s' % str("$" + format(float(account_amount_in_usd), '.2f')), end = ' ')
-print("# Ratio:" + '%5s' % str(format(total_asset_percentage, '.2f')) + "%", end = ' ')
+print("# Ratio:" + '%11s' % str(format(total_asset_to_rebalance_percentage, '.2f') + "/" + format(total_asset_percentage, '.2f')) + "%", end = ' ')
 print("# pref:" + '%7s' % str(total_target_percentage) + "%")
 print("=====================================================================================================================================")
 print()
