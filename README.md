@@ -1,6 +1,7 @@
-# 3c-bot-stats
+# 3commas-tools
 
-## Python3 script for getting an overview of your 3Commas deals
+## 3c-bot-stats
+### Python3 script for getting an overview of your 3Commas deals
 <p>I mostly use this to check the performance of different bots in my paper account. Which bots have earned the most today without gathering too many red bags?</p>
 <p>To change between real account and paper account use your browser to go to the 3c dashboard and change there. It is a global setting and will affect the account this script use.</p>
 <p>The script is a total hack and comes with no warranties. I recommend setting it up with a read only API key. Python is not my primary language either, but I start to like it :-)</p>
@@ -36,32 +37,19 @@ The first time you run the script it will ask for your API key and secret.
 The script will save it in $HOME/.3c_keys (or 3c_keys.bat on Windows).
 If you like to change the API key/secret or wipe it from you system, just delete the $HOME/.3c_keys file (or 3c_keys.bat).
 	
-## Run the script
+## Run the scripts
 ```
-# filter on deals that have started or stopped today or is currently running
-# today is default and can be omitted
-./3c_bot_stats.sh today
-./3c_bot_stats.sh
-# use 3c_bot_stats.bat on windows
-
-# show only active/running deals
-./3c_bot_stats.sh active
-
-# show all deals (limit on 1000)
-./3c_bot_stats.sh all
-
-# show deals that where started or stopped at given datetime filter
-# eg. on filters can be:
-# 2021
-# 2021-05
-# 2021-05-31
-# 2021-05-31T14:55
-./3c_bot_stats.sh 2021-05-31
+# Use 3c_bot_stats.bat on windows
+./3c_bot_stats.sh today        # filter on deals that have started or stopped today or is currently running
+./3c_bot_stats.sh              # today is default and can be omitted
+./3c_bot_stats.sh active       # show only active/running deals
+./3c_bot_stats.sh all          # show all deals (limit on 1000)
+./3c_bot_stats.sh 2021-05-31   # filter on a part of date/time, could be 2021-05 for year-month or 2021-05-31T14:55 to narrow down to specific time
 ```
 
 ## Nice to know
-* Stop = None means that this is an active deal.
-* The use of paper account or real account is set globally on you account, so to use this script on paper account, go to 3commas web console and click paper account there. Then the script will automatically use the paper account and vice versa.
+* In 3c-bot-stats: "Stop: None" means that this is an active deal.
+* The use of paper account or real account is set globally on you account, so to use this scripts on paper account, go to 3commas web console and click paper account there. Then the script will automatically use the paper account and vice versa.
 
 ## Additional API info:
 * https://github.com/3commas-io/3commas-official-api-docs
