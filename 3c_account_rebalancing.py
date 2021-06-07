@@ -148,7 +148,7 @@ for balance in balances:
         #print("Account: " + str(account['name']), end = ' # ')
         print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
         print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
-        print("# Ratio:" + '%6s' % str(format(total_asset_percentage, '.2f')) + "%", end = ' ')
+        print("# Ratio:" + '%6s' % str(format(float(asset_amount_percent), '.2f')) + "%", end = ' ')
         print("# Action: n/a")
 
 
