@@ -50,8 +50,8 @@ for this_preferred_ratio in preferred_ratio_raw:
 
 
 p3cw = Py3CW(
-    key=os.environ.get('threecommas_RW_key').rstrip(),
-    secret=os.environ.get('threecommas_RW_secret').rstrip(),
+    key=os.environ.get('threecommas_rw_key').rstrip(),
+    secret=os.environ.get('threecommas_rw_secret').rstrip(),
     request_options={
         'request_timeout': 10,
         'nr_of_retries': 1,
@@ -83,8 +83,9 @@ target_amount_in_usd    = 0
 action_to_market        = dict()
 
 
-print("Currently in account:", end = ' ')
-print(str(account['name']))
+print("Account: " + str(account['name']))
+print("Preferred Ratios: " + str(config['Account1']['preferred_ratio']) + "  (+/-" + str(allowed_deviation) + "%)")
+print()
 
 for balance in balances:
     asset_currency          = balance['currency_code']
