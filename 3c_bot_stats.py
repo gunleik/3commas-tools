@@ -28,6 +28,11 @@ if arguments > 0:
 else:
     me_want = "today"
 
+if arguments > 1:
+    argument2 = sys.argv[2]
+else:
+    argument2 = "na"
+
 if me_want == "today":
     my_limit = 200
 else:
@@ -122,14 +127,18 @@ for account in accounts:
                     except:
                         print(" # ENABLED: DELETED")
                         
-                    print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-11s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # SO: " + str(deal['completed_safety_orders_count']) + "(+" + str(deal['completed_manual_safety_orders_count']) + ")/" + str(deal['max_safety_orders']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
+                    if argument2 != "totals":
+                        print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-11s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # SO: " + str(deal['completed_safety_orders_count']) + "(+" + str(deal['completed_manual_safety_orders_count']) + ")/" + str(deal['max_safety_orders']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
+                        
                 else:
                     this_bot_sum = float(this_profitusd) + this_bot_sum
                     if deal['finished?'] == True:
                         this_bot_closed_sum = float(this_profitusd) + this_bot_closed_sum
                     elif deal['finished?'] == False:
                         this_bot_reserved_sum = float(this_profitusd) + this_bot_reserved_sum
-                    print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-11s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # SO: " + str(deal['completed_safety_orders_count']) + "(+" + str(deal['completed_manual_safety_orders_count']) + ")/" + str(deal['max_safety_orders']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
+                    
+                    if argument2 != "totals":
+                        print("Start: " + str(deal['created_at']) + " # Stop: " + '%-24s' % str(deal['closed_at']) + " # Pair: " + '%-11s' % str(deal['pair']) + " # Status: " + '%-11s' % str(deal['status']) + " # SO: " + str(deal['completed_safety_orders_count']) + "(+" + str(deal['completed_manual_safety_orders_count']) + ")/" + str(deal['max_safety_orders']) + " # Profit: " + '%6s' % str(this_profitpst) + "% / " + str(this_profitusd) + " USD")
 
 
         if me_want == "active":

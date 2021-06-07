@@ -2,7 +2,7 @@
 
 if exist 3c_keys.bat (
 	3c_keys.bat
-	python 3c_bot_stats.py %1
+	python 3c_bot_stats.py %1 %2
 	pause
 ) else (
 	echo If not done already, you have to create an API key at https://3commas.io/api_access_tokens
@@ -19,7 +19,7 @@ if not exist 3c_keys.bat (
 	echo set threecommas_secret=%threecommasapisecret% >>3c_keys.bat
 
 	3c_keys.bat
-	python 3c_bot_stats.py %1
+	python 3c_bot_stats.py %1 %2
 	pause
 )
 
