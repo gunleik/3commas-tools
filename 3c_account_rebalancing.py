@@ -184,8 +184,13 @@ if argument == "apply" or argument == "testapply":
             print("Sell: ", end = '')
             print(str(this_asset), end = ' ')
             print(sell_asset_amount, end = '')
-
-            if float(sell_asset_amount) > float(conversion_info['minLotSize']):
+            
+            try:
+                minimumTrade = conversion_info['minTotal']
+            except:
+                minimumTrade = 0
+            
+            if float(sell_asset_amount) >= float(conversion_info['minLotSize']) and float(this_amount) >= float(minimumTrade):
                 if argument == "apply":
                     error, smart_trade_sell  = p3cw.request(
                         entity='smart_trades_v2', 
@@ -204,7 +209,7 @@ if argument == "apply" or argument == "testapply":
                         }
                     )
             else:
-                print(" # below minLotSize", end = '')
+                print(" # below minLotSize (" + str(conversion_info['minLotSize']) + ") or minimumTrade (" + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
 
             print()
     
@@ -228,7 +233,12 @@ if argument == "apply" or argument == "testapply":
             print(str(this_asset), end = ' ')
             print(buy_asset_amount, end = '')
     
-            if float(buy_asset_amount) > float(conversion_info['minLotSize']):
+            try:
+                minimumTrade = conversion_info['minTotal']
+            except:
+                minimumTrade = 0
+                
+            if float(buy_asset_amount) >= float(conversion_info['minLotSize']) and float(this_amount) >= float(minimumTrade):
                 if argument == "apply":
                     error, smart_trade_buy  = p3cw.request(
                         entity='smart_trades_v2', 
@@ -247,7 +257,7 @@ if argument == "apply" or argument == "testapply":
                         }
                     )
             else:
-                print(" # below minLotSize", end = '')
+                print(" # below minLotSize (" + str(conversion_info['minLotSize']) + ") or minimumTrade (" + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
 
             print()
 
