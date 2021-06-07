@@ -181,7 +181,8 @@ if argument == "apply" or argument == "testapply":
                 }    
             )
             precision = conversion_info['minLotSize'].find('1') - conversion_info['minLotSize'].find('.')
-            sell_asset_amount = float(round((float(this_amount) / float(conversion_info['bid'])), precision))
+            sell_asset_amount_exacto = float(this_amount) / float(conversion_info['bid'])
+            sell_asset_amount        = float(round(sell_asset_amount_exacto, precision))
             print("Sell: ", end = '')
             print(str(this_asset), end = ' ')
             print(sell_asset_amount, end = '')
@@ -209,8 +210,13 @@ if argument == "apply" or argument == "testapply":
                             }
                         }
                     )
+                    try:
+                        print(" # EXCH_ERROR: " + error['msg'], end = '')
+                    except:
+                        print(" # OK", end = '')
+
             else:
-                print(" # below minLotSize (" + str(conversion_info['minLotSize']) + ") or minimumTrade (" + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
+                print(" # ERROR: LotSize: (" + str(sell_asset_amount_exacto) + " < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
 
             print()
     
@@ -229,7 +235,9 @@ if argument == "apply" or argument == "testapply":
                 }    
             )
             precision = conversion_info['minLotSize'].find('1') - conversion_info['minLotSize'].find('.')
-            buy_asset_amount = float(round((float(this_amount) / float(conversion_info['ask'])), precision))
+            #buy_asset_amount = float(round((float(this_amount) / float(conversion_info['ask'])), precision))
+            buy_asset_amount_exacto = float(this_amount) / float(conversion_info['ask'])
+            buy_asset_amount        = float(round(buy_asset_amount_exacto, precision))
             print("Buy : ", end = '')
             print(str(this_asset), end = ' ')
             print(buy_asset_amount, end = '')
@@ -257,8 +265,13 @@ if argument == "apply" or argument == "testapply":
                             }
                         }
                     )
+                    try:
+                        print(" # EXCH_ERROR: " + error['msg'], end = '')
+                    except:
+                        print(" # OK", end = '')
+
             else:
-                print(" # below minLotSize (" + str(conversion_info['minLotSize']) + ") or minimumTrade (" + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
+                print(" # ERROR: LotSize: (" + str(buy_asset_amount_exacto) + " < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
 
             print()
 
