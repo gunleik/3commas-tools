@@ -33,8 +33,8 @@ if arguments > 1:
 else:
     argument2 = "na"
 
-if me_want == "today":
-    my_limit = 200
+if me_want == "today" or me_want == "active":
+    my_limit = 250
 else:
     my_limit = 1000
 
