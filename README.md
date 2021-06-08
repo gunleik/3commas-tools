@@ -42,6 +42,7 @@ If you like to change the API key/secret or wipe it from you system, just delete
 # Use 3c_bot_stats.bat on windows
 ./3c_bot_stats.sh today        # filter on deals that have started or stopped today or is currently running
 ./3c_bot_stats.sh              # today is default and can be omitted
+./3c_bot_stats.sh today totals # will not show each deal, just show the total stats of each bot
 ./3c_bot_stats.sh active       # show only active/running deals
 ./3c_bot_stats.sh all          # show all deals (limit on 1000)
 ./3c_bot_stats.sh 2021-05-31   # filter on a part of date/time, could be 2021-05 for year-month or 2021-05-31T14:55 to narrow down to specific time
