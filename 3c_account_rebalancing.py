@@ -15,6 +15,7 @@ import sys
 import configparser
 
 from py3cw.request import Py3CW
+from datetime import datetime
 from pprint import pprint
 
 inifile  = "3c_account_rebalancing_default.ini"
@@ -82,7 +83,9 @@ total_target_percentage = 0
 target_amount_in_usd    = 0
 action_to_market        = dict()
 
-
+print("#########################################################################################################################")
+now = datetime.now()
+print(now.strftime("%Y-%m-%d %H:%M:%S"))
 print("Account: " + str(account['name']))
 print("Preferred Ratios: " + str(config['Account1']['preferred_ratio']) + "  (+/-" + str(allowed_deviation) + "%)")
 print()
@@ -133,7 +136,7 @@ for balance in balances:
             print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
             print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
             print("# Ratio:" + '%6s' % str(asset_amount_percent), end = '% ')
-            print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + "($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
+            print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + " ($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
             print("# Action: " + '%6s' % balance_action, end = ' ')
             print("# Amount: $" + str(format(dev_amount_in_usd, '.2f')))
             
@@ -153,13 +156,13 @@ for balance in balances:
         print("# Action: n/a")
 
 
-print("-------------------------------------------------------------------------------------------------------------------------------------")
+print("-------------------------------------------------------------------------------------------------------------------------")
 #print("Account: " + str(account['name']), end = ' # ')
 print('%-8s' % "---:       --------", end = ' ')
 print("# USD:" + '%10s' % str("$" + format(float(account_amount_in_usd), '.2f')), end = ' ')
 print("# Ratio:" + '%11s' % str(format(total_asset_to_rebalance_percentage, '.2f') + "/" + format(total_asset_percentage, '.2f')) + "%", end = ' ')
 print("# pref:" + '%7s' % str(total_target_percentage) + "%")
-print("=====================================================================================================================================")
+print("=========================================================================================================================")
 print()
 
 
@@ -275,4 +278,4 @@ if argument == "apply" or argument == "testapply":
 
             print()
 
-    
+

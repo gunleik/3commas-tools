@@ -65,6 +65,17 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ./3c_close_all_paper_deals.sh panic_sell  # "close at market price" for all paper deals (sell back to the original asset)
 ```
 
+## Auto Rebalancing
+```
+# If you like to automatically rebalance your account regularly you can 
+# in Linux add the script to cron (crontab -e).
+# 0 * * * * means every hour at 00 minutes, check out 
+# https://crontab-generator.org/ if you want to change the interval.
+# Make sure the paths are correct for your system.
+
+0 * * * * cd ~/git/3commas-tools; ./3c_account_rebalancing.sh ~/3c_account_rebalancing_ftx-main.ini apply >>~/logs/3c_account_rebalancing_ftx-main.log 2>>~/logs/3c_account_rebalancing_ftx-main.log
+```
+
 ## Nice to know
 * In 3c-bot-stats: "Stop: None" means that this is an active deal.
 * The use of paper account or real account is set globally on you account, so to use this scripts on paper account, go to 3commas web console and click paper account there. Then the script will automatically use the paper account and vice versa.
