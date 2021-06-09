@@ -8,7 +8,7 @@
 <p>These scripts is a total hack and comes with no warranties. Python is not my primary language either, but I start to like it. If you have improvements please submit them :-)</p>
 
 Screenshot:<br>
-<img src="https://user-images.githubusercontent.com/2580262/120374281-a97be580-c319-11eb-934c-eab07f47e6c0.png" width=700>
+<img src="https://user-images.githubusercontent.com/2580262/121309352-5fd76000-c902-11eb-8683-d087b06cff45.png" width=700>
 
 ## Installation
 ```

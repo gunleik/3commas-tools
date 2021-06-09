@@ -50,8 +50,8 @@ for this_preferred_ratio in preferred_ratio_raw:
 
 
 p3cw = Py3CW(
-    key=os.environ.get('threecommas_rw_key').rstrip(),
-    secret=os.environ.get('threecommas_rw_secret').rstrip(),
+    key=os.environ.get('threecommas_key').rstrip(),
+    secret=os.environ.get('threecommas_secret').rstrip(),
     request_options={
         'request_timeout': 10,
         'nr_of_retries': 1,
