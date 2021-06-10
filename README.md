@@ -5,6 +5,7 @@
 <p>3c_use_account: change between paper and real account to use with 3c_bot_stats.</p>
 <p>3c_close_all_paper_deals: cancel or sell all deals in the paper account to get a fresh start with 3c_bot_stats.</p>
 <p>3c_account_rebalancing: rebalance any 3commas connected account.</p>
+<p>3c_account_stats: show list of your accounts and their USD value.</p>
 <p>These scripts is a total hack and comes with no warranties. Python is not my primary language either, but I start to like it. If you have improvements please submit them :-)</p>
 
 Screenshot:<br>
@@ -44,28 +45,33 @@ If you like to change the API key/secret or wipe it from you system, just delete
 
 # 3c_bot_stats:
 # Use 3c_bot_stats.sh for Linux and 3c_bot_stats.bat on windows
-./3c_bot_stats.sh today                    # filter on deals that have started or stopped today or is currently running
-./3c_bot_stats.sh                          # today is default and can be omitted
-./3c_bot_stats.sh today totals             # will not show each deal, just show the total stats of each bot
-./3c_bot_stats.sh active                   # show only active/running deals
-./3c_bot_stats.sh all                      # show all deals (limit on 1000)
-./3c_bot_stats.sh 2021-05-31               # filter on a part of date/time, could be 2021-05 for year-month or 2021-05-31T14:55 to narrow down to specific time'
+./3c_bot_stats.sh today                    # Filter on deals that have started or stopped today or is currently running
+./3c_bot_stats.sh                          # Today is default and can be omitted
+./3c_bot_stats.sh today totals             # Will not show each deal, just show the total stats of each bot
+./3c_bot_stats.sh active                   # Show only active/running deals
+./3c_bot_stats.sh all                      # Show all deals (limit on 1000)
+./3c_bot_stats.sh 2021-05-31               # Filter on a part of date/time, could be 2021-05 for year-month or 2021-05-31T14:55 to narrow down to specific time'
 
 # 3c_use_account change between paper and real account for the 3c_bot_stats script to use:
 # this setting is set globally on your account, so setting this to paper on the command line will also change it to the active account in your web browser the next time you go there
-./3c_use_account.sh paper                  # set to paper account
-./3c_use_account.sh real                   # set to real account
+./3c_use_account.sh paper                  # Set to paper account
+./3c_use_account.sh real                   # Set to real account
 
 # 3c_account_rebalancing rebalance any 3commas connected account:
-./3c_account_rebalancing.sh                # rebalance a 3commas connected account with settings found in 3c_account_rebalancing_default.ini
-./3c_account_rebalancing.sh apply          # apply rebalance settings found in the ini-file
-./3c_account_rebalancing.sh apply minimal  # apply and use minimal output, good for cron job that logs output to file
-./3c_account_rebalancing.sh testapply      # do a dryrun of the apply to check for error messages
+./3c_account_rebalancing.sh                # Rebalance a 3commas connected account with settings found in 3c_account_rebalancing_default.ini
+./3c_account_rebalancing.sh apply          # Apply rebalance settings found in the ini-file
+./3c_account_rebalancing.sh apply minimal  # Apply and use minimal output, good for cron job that logs output to file
+./3c_account_rebalancing.sh testapply      # Do a dryrun of the apply to check for error messages
 ./3c_account_rebalancing.sh 3c_account_rebalancing_othersettings.ini  # alternative settings file, so the script can be run for different accounts
 
 # 3c_close_all_paper_deals close all paper deals:
-./3c_close_all_paper_deals.sh cancel       # cancel all paper deals (leave them in the current asset)
-./3c_close_all_paper_deals.sh panic_sell   # "close at market price" for all paper deals (sell back to the original asset)
+./3c_close_all_paper_deals.sh cancel       # Cancel all paper deals (leave them in the current asset)
+./3c_close_all_paper_deals.sh panic_sell   # "Close at market price" for all paper deals (sell back to the original asset)
+
+# 3c_account_stats show accounts with their USD value:
+./3c_account_stats.sh                      # Default view
+./3c_account_stats.sh minimal              # Hide some of the output for piping to log-file
+./3c_account_stats.sh hidefutures          # E.g. FTX will show futures accounts with sililar value as your spot accounts, so the total becomes wrong. If you don't use futures you can hide them with this argument.
 ```
 
 ## Auto Rebalancing
