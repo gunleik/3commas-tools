@@ -55,9 +55,10 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ./3c_use_account.sh real               # set to real account
 
 # 3c_account_rebalancing rebalance any 3commas connected account:
-./3c_account_rebalancing.sh            # rebalance a 3commas connected account with settings found in 3c_account_rebalancing_default.ini
-./3c_account_rebalancing.sh apply      # apply rebalance settings found in the ini-file
-./3c_account_rebalancing.sh testapply  # do a dryrun of the apply to check for error messages
+./3c_account_rebalancing.sh                # rebalance a 3commas connected account with settings found in 3c_account_rebalancing_default.ini
+./3c_account_rebalancing.sh apply          # apply rebalance settings found in the ini-file
+./3c_account_rebalancing.sh apply minimal  # apply and use minimal output, good for cron job that logs output to file
+./3c_account_rebalancing.sh testapply      # do a dryrun of the apply to check for error messages
 ./3c_account_rebalancing.sh 3c_account_rebalancing_othersettings.ini  # alternative settings file, so the script can be run for different accounts
 
 # 3c_close_all_paper_deals close all paper deals:
@@ -69,11 +70,13 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ```
 # If you like to automatically rebalance your account regularly you can 
 # in Linux add the script to cron (crontab -e).
-# 0 * * * * means every hour at 00 minutes, check out 
+# */30 * * * * means every 30 minutes, check out 
 # https://crontab-generator.org/ if you want to change the interval.
 # Make sure the paths are correct for your system.
 
-0 * * * * cd ~/git/3commas-tools; ./3c_account_rebalancing.sh ~/3c_account_rebalancing_ftx-main.ini apply >>~/logs/3c_account_rebalancing_ftx-main.log 2>>~/logs/3c_account_rebalancing_ftx-main.log
+*/30 * * * * cd ~/git/3commas-tools; ./3c_account_rebalancing.sh ~/3c_account_rebalancing_ftx-main.ini apply minimal >>~/3c_account_rebalancing_ftx-main.log 2>>~/3c_account_rebalancing_ftx-main.log
+
+# The above command in crontab will run rebalancing every 30 minutes, with settings from ~/3c_account_rebalancing_ftx-main.ini and log output and errors to ~/3c_account_rebalancing_ftx-main.log
 ```
 
 ## Nice to know
