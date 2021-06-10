@@ -18,23 +18,27 @@ from py3cw.request import Py3CW
 from datetime import datetime
 from pprint import pprint
 
-inifile  = "3c_account_rebalancing_default.ini"
-argument  = ""
-arguments = len(sys.argv) - 1
+inifile     = "3c_account_rebalancing_default.ini"
+my_action   = ""
+log_min     = False
+
+arguments   = len(sys.argv) - 1
 if arguments > 0:
-    argument = sys.argv[1]
-    if ".ini" in argument:
-        inifile  = sys.argv[1]
-        if arguments > 1:
-            argument = sys.argv[2]
+    for this_argument in sys.argv:
+        if ".ini" in this_argument:
+            inifile  = this_argument
+        if this_argument == "apply" or this_argument == "testapply":
+            my_action = this_argument
+        if this_argument == "minimal":
+            log_min = True
 
 
 config = configparser.ConfigParser()
 config.read(inifile)
 
-account_id          = int(config['Account1']['account_id'])
-market_currency     = str(config['Account1']['market_currency'])
-allowed_deviation   = float(config['Account1']['allowed_deviation'])
+account_id          = int(config['Account']['account_id'])
+market_currency     = str(config['Account']['market_currency'])
+allowed_deviation   = float(config['Account']['allowed_deviation'])
 
 if account_id == 12345678:
     print("Please edit the 3c_account_rebalancing_default.ini file or")
@@ -42,7 +46,7 @@ if account_id == 12345678:
     sys.exit()
 
 preferred_ratio     = dict()
-preferred_ratio_raw = config['Account1']['preferred_ratio'].split(",")
+preferred_ratio_raw = config['Account']['preferred_ratio'].split(",")
 for this_preferred_ratio in preferred_ratio_raw:
     this_asset_referred_ratio = this_preferred_ratio.strip().split(":")
     preferred_ratio[this_asset_referred_ratio[0]] = this_asset_referred_ratio[1]
@@ -83,12 +87,20 @@ total_target_percentage = 0
 target_amount_in_usd    = 0
 action_to_market        = dict()
 
-print("#########################################################################################################################")
+if log_min == False:
+    print("#########################################################################################################################")
 now = datetime.now()
-print(now.strftime("%Y-%m-%d %H:%M:%S"))
-print("Account: " + str(account['name']))
-print("Preferred Ratios: " + str(config['Account1']['preferred_ratio']) + "  (+/-" + str(allowed_deviation) + "%)")
-print()
+print(now.strftime("%Y-%m-%d %H:%M:%S"), end = ' ')
+if log_min == False:
+    print()
+print('Account: "' + str(account['name']), end = '" ')
+if log_min == False:
+    print()
+    print("Preferred Ratios: " + str(config['Account']['preferred_ratio']) + "  (+/-" + str(allowed_deviation) + "%)", end = '')
+    print()
+    print()
+else:
+    print("Ratio:", end = ' "')
 
 for balance in balances:
     asset_currency          = balance['currency_code']
@@ -131,14 +143,16 @@ for balance in balances:
             action_to_market[asset_currency] = {'action': balance_action, 'amount': dev_amount_in_usd}
             
             
-            
-            #print("Account: " + str(account['name']), end = ' # ')
-            print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
-            print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
-            print("# Ratio:" + '%6s' % str(asset_amount_percent), end = '% ')
-            print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + " ($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
-            print("# Action: " + '%6s' % balance_action, end = ' ')
-            print("# Amount: $" + str(format(dev_amount_in_usd, '.2f')))
+            if log_min == False:
+                #print("Account: " + str(account['name']), end = ' # ')
+                print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
+                print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
+                print("# Ratio:" + '%6s' % str(asset_amount_percent), end = '% ')
+                print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + " ($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
+                print("# Action: " + '%6s' % balance_action, end = ' ')
+                print("# Amount: $" + str(format(dev_amount_in_usd, '.2f')))
+            else:
+                print(str(asset_currency + ":") + str(asset_amount_percent), end = '% ')
             
             total_asset_percentage = float(total_asset_percentage) + float(asset_amount_percent)
             total_asset_to_rebalance_percentage = float(total_asset_to_rebalance_percentage) + float(asset_amount_percent)
@@ -149,26 +163,34 @@ for balance in balances:
         asset_amount_in_usd     = float(balance['usd_value'])
         asset_amount_percent    = format(balance['percentage'], '.2f')
         total_asset_percentage  = float(total_asset_percentage) + float(asset_amount_percent)
-        #print("Account: " + str(account['name']), end = ' # ')
-        print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
-        print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
-        print("# Ratio:" + '%6s' % str(format(float(asset_amount_percent), '.2f')) + "%", end = ' ')
-        print("# Action: n/a")
+        
+        if log_min == False:
+            #print("Account: " + str(account['name']), end = ' # ')
+            print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
+            print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
+            print("# Ratio:" + '%6s' % str(format(float(asset_amount_percent), '.2f')) + "%", end = ' ')
+            print("# Action: n/a")
 
 
-print("-------------------------------------------------------------------------------------------------------------------------")
-#print("Account: " + str(account['name']), end = ' # ')
-print('%-8s' % "---:       --------", end = ' ')
-print("# USD:" + '%10s' % str("$" + format(float(account_amount_in_usd), '.2f')), end = ' ')
-print("# Ratio:" + '%11s' % str(format(total_asset_to_rebalance_percentage, '.2f') + "/" + format(total_asset_percentage, '.2f')) + "%", end = ' ')
-print("# pref:" + '%7s' % str(total_target_percentage) + "%")
-print("=========================================================================================================================")
-print()
-
-
-if argument == "apply" or argument == "testapply":
-    print("Applying rebalancing (" + argument + "):")
+if log_min == False:
+    print("-------------------------------------------------------------------------------------------------------------------------")
+    #print("Account: " + str(account['name']), end = ' # ')
+    print('%-8s' % "---:       --------", end = ' ')
+    print("# USD:" + '%10s' % str("$" + format(float(account_amount_in_usd), '.2f')), end = ' ')
+    print("# Ratio:" + '%11s' % str(format(total_asset_to_rebalance_percentage, '.2f') + "/" + format(total_asset_percentage, '.2f')) + "%", end = ' ')
+    print("# pref:" + '%7s' % str(total_target_percentage) + "%")
+    print("=========================================================================================================================")
     print()
+else:
+    print('"', end = ' ')
+
+
+if my_action == "apply" or my_action == "testapply":
+    if log_min == False:
+        print("Applying rebalancing (" + my_action + "):")
+        print()
+    else:
+        print("ApplyMethod: " + my_action)
     
     for this_asset in action_to_market:
         this_action = action_to_market[this_asset]['action']
@@ -196,7 +218,7 @@ if argument == "apply" or argument == "testapply":
                 minimumTrade = 0
             
             if float(sell_asset_amount) >= float(conversion_info['minLotSize']) and float(this_amount) >= float(minimumTrade):
-                if argument == "apply":
+                if my_action == "apply":
                     error, smart_trade_sell  = p3cw.request(
                         entity='smart_trades_v2', 
                         action='new',
@@ -251,7 +273,7 @@ if argument == "apply" or argument == "testapply":
                 minimumTrade = 0
                 
             if float(buy_asset_amount) >= float(conversion_info['minLotSize']) and float(this_amount) >= float(minimumTrade):
-                if argument == "apply":
+                if my_action == "apply":
                     error, smart_trade_buy  = p3cw.request(
                         entity='smart_trades_v2', 
                         action='new',
