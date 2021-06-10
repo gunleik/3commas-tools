@@ -27,6 +27,19 @@ if arguments > 0:
     my_action = sys.argv[1]
 
 
+if my_action == "--help":
+    print()
+    print("Usage: ./3c_use_account.sh [real|paper]")
+    print()
+    print("Use this to change active account to be used with 3c_bot_stats")
+    print()
+    print("arguments:")
+    print("    real,        set active account to real account")
+    print("    paper,       set active account to paper account")
+    print()
+    sys.exit()
+
+
 if str(my_action) == "real" or str(my_action) == "paper":
     my_nothing = "yeay"
 else:

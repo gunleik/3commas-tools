@@ -26,6 +26,16 @@ arguments = len(sys.argv) - 1
 if arguments > 0:
     my_action = sys.argv[1]
 
+if my_action == "--help":
+    print()
+    print("Usage: ./3c_close_all_paper_deals.sh [cancel|panic_sell]")
+    print()
+    print("arguments:")
+    print("    cancel,        cancel all paper deals, leave them in the current asset")
+    print("    panic_sell,    sell all paper deals at market price")
+    print()
+    sys.exit()
+
 
 if str(my_action) == "cancel" or str(my_action) == "panic_sell":
     my_nothing = "yeay"

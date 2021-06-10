@@ -31,6 +31,19 @@ if arguments > 0:
             my_action = this_argument
         if this_argument == "minimal":
             log_min = True
+        if this_argument == "--help":
+            print()
+            print("Usage: ./3c_account_rebalancing.sh [my_settings.ini] [apply|testapply] [minimal]")
+            print()
+            print("Default settings found in 3c_account_rebalancing_default.ini")
+            print()
+            print("optional arguments:")
+            print("    apply,              apply rebalance with the settings found in the ini-file")
+            print("    minimal,            use minimal output, good for cron jobs that logs output to file")
+            print("    testapply,          do a dryrun of the apply to check for error messages")
+            print("    my_settings.ini,    alternative settings file, so the script can be run for multiple accounts")
+            print()
+            sys.exit()
 
 
 config = configparser.ConfigParser()
@@ -42,7 +55,8 @@ allowed_deviation   = float(config['Account']['allowed_deviation'])
 
 if account_id == 12345678:
     print("Please edit the 3c_account_rebalancing_default.ini file or")
-    print("specify an alternative ini-file as first command line argument")
+    print("specify an alternative ini-file as command line argument.")
+    print("Use --help for list of arguments.")
     sys.exit()
 
 preferred_ratio     = dict()

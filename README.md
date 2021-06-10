@@ -33,26 +33,28 @@ pip install py3cw
 
 ## Generate API key
 If not done already, you have to create an API key at https://3commas.io/api_access_tokens.
-3c_bot_stats needs minimum "Account Read" and "Bots Read" access, but the other scripts need write access also.
+To get full functionality the API key have to be set up with all the access levels.
 The first time you run the script it will ask for your API key and secret.
 The script will save it in $HOME/.3c_keys (or 3c_keys.bat on Windows).
 If you like to change the API key/secret or wipe it from you system, just delete the $HOME/.3c_keys file (or 3c_keys.bat).
 
 ## Run the scripts
 ```
+# All the commands support --help to show a quick list of arguments
+
 # 3c_bot_stats:
 # Use 3c_bot_stats.sh for Linux and 3c_bot_stats.bat on windows
-./3c_bot_stats.sh today        # filter on deals that have started or stopped today or is currently running
-./3c_bot_stats.sh              # today is default and can be omitted
-./3c_bot_stats.sh today totals # will not show each deal, just show the total stats of each bot
-./3c_bot_stats.sh active       # show only active/running deals
-./3c_bot_stats.sh all          # show all deals (limit on 1000)
-./3c_bot_stats.sh 2021-05-31   # filter on a part of date/time, could be 2021-05 for year-month or 2021-05-31T14:55 to narrow down to specific time'
+./3c_bot_stats.sh today                    # filter on deals that have started or stopped today or is currently running
+./3c_bot_stats.sh                          # today is default and can be omitted
+./3c_bot_stats.sh today totals             # will not show each deal, just show the total stats of each bot
+./3c_bot_stats.sh active                   # show only active/running deals
+./3c_bot_stats.sh all                      # show all deals (limit on 1000)
+./3c_bot_stats.sh 2021-05-31               # filter on a part of date/time, could be 2021-05 for year-month or 2021-05-31T14:55 to narrow down to specific time'
 
 # 3c_use_account change between paper and real account for the 3c_bot_stats script to use:
 # this setting is set globally on your account, so setting this to paper on the command line will also change it to the active account in your web browser the next time you go there
-./3c_use_account.sh paper              # set to paper account
-./3c_use_account.sh real               # set to real account
+./3c_use_account.sh paper                  # set to paper account
+./3c_use_account.sh real                   # set to real account
 
 # 3c_account_rebalancing rebalance any 3commas connected account:
 ./3c_account_rebalancing.sh                # rebalance a 3commas connected account with settings found in 3c_account_rebalancing_default.ini
@@ -62,8 +64,8 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ./3c_account_rebalancing.sh 3c_account_rebalancing_othersettings.ini  # alternative settings file, so the script can be run for different accounts
 
 # 3c_close_all_paper_deals close all paper deals:
-./3c_close_all_paper_deals.sh cancel      # cancel all paper deals (leave them in the current asset)
-./3c_close_all_paper_deals.sh panic_sell  # "close at market price" for all paper deals (sell back to the original asset)
+./3c_close_all_paper_deals.sh cancel       # cancel all paper deals (leave them in the current asset)
+./3c_close_all_paper_deals.sh panic_sell   # "close at market price" for all paper deals (sell back to the original asset)
 ```
 
 ## Auto Rebalancing
@@ -76,7 +78,9 @@ If you like to change the API key/secret or wipe it from you system, just delete
 
 */30 * * * * cd ~/git/3commas-tools; ./3c_account_rebalancing.sh ~/3c_account_rebalancing_ftx-main.ini apply minimal >>~/3c_account_rebalancing_ftx-main.log 2>>~/3c_account_rebalancing_ftx-main.log
 
-# The above command in crontab will run rebalancing every 30 minutes, with settings from ~/3c_account_rebalancing_ftx-main.ini and log output and errors to ~/3c_account_rebalancing_ftx-main.log
+# The above command in crontab will run rebalancing every 30 minutes, 
+# with settings from ~/3c_account_rebalancing_ftx-main.ini and log 
+# output and errors to ~/3c_account_rebalancing_ftx-main.log
 ```
 
 ## Nice to know
