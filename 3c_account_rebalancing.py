@@ -99,6 +99,8 @@ if log_min == False:
     print("Preferred Ratios: " + str(config['Account1']['preferred_ratio']) + "  (+/-" + str(allowed_deviation) + "%)", end = '')
     print()
     print()
+else:
+    print("Ratio:", end = ' "')
 
 for balance in balances:
     asset_currency          = balance['currency_code']
@@ -149,6 +151,8 @@ for balance in balances:
                 print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + " ($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
                 print("# Action: " + '%6s' % balance_action, end = ' ')
                 print("# Amount: $" + str(format(dev_amount_in_usd, '.2f')))
+            else:
+                print(str(asset_currency + ":") + str(asset_amount_percent), end = '% ')
             
             total_asset_percentage = float(total_asset_percentage) + float(asset_amount_percent)
             total_asset_to_rebalance_percentage = float(total_asset_to_rebalance_percentage) + float(asset_amount_percent)
@@ -177,6 +181,8 @@ if log_min == False:
     print("# pref:" + '%7s' % str(total_target_percentage) + "%")
     print("=========================================================================================================================")
     print()
+else:
+    print('"', end = ' ')
 
 
 if my_action == "apply" or my_action == "testapply":
