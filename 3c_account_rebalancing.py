@@ -36,9 +36,9 @@ if arguments > 0:
 config = configparser.ConfigParser()
 config.read(inifile)
 
-account_id          = int(config['Account1']['account_id'])
-market_currency     = str(config['Account1']['market_currency'])
-allowed_deviation   = float(config['Account1']['allowed_deviation'])
+account_id          = int(config['Account']['account_id'])
+market_currency     = str(config['Account']['market_currency'])
+allowed_deviation   = float(config['Account']['allowed_deviation'])
 
 if account_id == 12345678:
     print("Please edit the 3c_account_rebalancing_default.ini file or")
@@ -46,7 +46,7 @@ if account_id == 12345678:
     sys.exit()
 
 preferred_ratio     = dict()
-preferred_ratio_raw = config['Account1']['preferred_ratio'].split(",")
+preferred_ratio_raw = config['Account']['preferred_ratio'].split(",")
 for this_preferred_ratio in preferred_ratio_raw:
     this_asset_referred_ratio = this_preferred_ratio.strip().split(":")
     preferred_ratio[this_asset_referred_ratio[0]] = this_asset_referred_ratio[1]
@@ -96,7 +96,7 @@ if log_min == False:
 print('Account: "' + str(account['name']), end = '" ')
 if log_min == False:
     print()
-    print("Preferred Ratios: " + str(config['Account1']['preferred_ratio']) + "  (+/-" + str(allowed_deviation) + "%)", end = '')
+    print("Preferred Ratios: " + str(config['Account']['preferred_ratio']) + "  (+/-" + str(allowed_deviation) + "%)", end = '')
     print()
     print()
 else:
