@@ -39,6 +39,20 @@ else:
     my_limit = 1000
 
 
+if me_want == "--help":
+    print()
+    print("Usage: ./3c_bot_stats.sh [today|active|all|datefilter] [totals]")
+    print()
+    print("optional arguments:")
+    print("    today,    (default) show deals started, ended today or currently running")
+    print("    today totals,       todays deals, but don't show individual deals")
+    print("    active,             show deals currently running")
+    print("    all,                show all deals (limit on 1000 per account)")
+    print("    datefilter,         e.g. 2021-05-31 to show deals from specific date")
+    print()
+    sys.exit()
+
+
 # initiate API with key/secret from os env
 p3cw = Py3CW(
     key=os.environ.get('threecommas_key').rstrip(),
