@@ -15,6 +15,7 @@ Screenshot:<br>
 ```
 # Linux
 # requires python3 to be installed
+# and require git if you like to clone (if not, just download the files)
 pip3 install py3cw
 git clone https://github.com/gunleik/3commas-tools.git
 
@@ -23,13 +24,6 @@ git clone https://github.com/gunleik/3commas-tools.git
 # requires python3 to be installed https://www.python.org/downloads/
 # and in the PATH
 pip install py3cw 
-
-# Windows binary
-# I've made a Windows binary with Pyinstaller, so if you trust me
-# and windows havent decided to block it as they often do with
-# uncommon exe's, then you can try this one:
-# https://github.com/gunleik/binaries/raw/main/3c-bot-stats.zip or
-# https://github.com/gunleik/binaries/raw/main/3c-bot-stats_extract.exe
 ```
 
 ## Generate API key
@@ -92,6 +86,11 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ## Nice to know
 * In 3c-bot-stats: "Stop: None" means that this is an active deal.
 * The use of paper account or real account is set globally on you account, so to use this scripts on paper account, go to 3commas web console and click paper account there. Then the script will automatically use the paper account and vice versa.
+
+## Changelog
+* 2021-06-13: paper close script; confirm the deal is paper before closing
+* 2021-06-13: rebalancing script; if asset is not already in your wallet the script will now do the initial buy of it
+* 2021-06-13: readme; removed windows binary, this will not be updated... please install python and run from command line
 
 ## Additional API info:
 * https://github.com/3commas-io/3commas-official-api-docs
