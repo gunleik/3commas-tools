@@ -18,9 +18,9 @@ from py3cw.request import Py3CW
 from datetime import datetime
 from pprint import pprint
 
-inifile     = "3c_account_rebalancing_default.ini"
-my_action   = ""
-log_min     = False
+inifile         = "3c_account_rebalancing_default.ini"
+my_action       = ""
+log_min         = False
 
 arguments   = len(sys.argv) - 1
 if arguments > 0:
@@ -59,14 +59,6 @@ if account_id == 12345678:
     print("Use --help for list of arguments.")
     sys.exit()
 
-preferred_ratio     = dict()
-preferred_ratio_raw = config['Account']['preferred_ratio'].split(",")
-for this_preferred_ratio in preferred_ratio_raw:
-    this_asset_referred_ratio = this_preferred_ratio.strip().split(":")
-    preferred_ratio[this_asset_referred_ratio[0]] = this_asset_referred_ratio[1]
-
-
-
 
 p3cw = Py3CW(
     key=os.environ.get('threecommas_key').rstrip(),
@@ -88,6 +80,19 @@ error, account = p3cw.request(
 account_amount_in_usd   = format(float(account['usd_amount']), '.2f')
 market_code             = account['market_code']
 
+
+action_to_market    = dict()
+preferred_ratio     = dict()
+preferred_ratio_raw = config['Account']['preferred_ratio'].split(",")
+for this_preferred_ratio in preferred_ratio_raw:
+    this_asset_referred_ratio = this_preferred_ratio.strip().split(":")
+    preferred_ratio[this_asset_referred_ratio[0]] = this_asset_referred_ratio[1]
+
+    basic_amount_of_this_asset = (float(account_amount_in_usd) * float(this_asset_referred_ratio[1])) / 100
+    action_to_market[this_asset_referred_ratio[0]] = {'action': 'buy', 'amount': float(basic_amount_of_this_asset)}
+
+
+
 # load balances
 error, balances = p3cw.request(
     entity='accounts',
@@ -99,7 +104,6 @@ total_asset_percentage  = 0
 total_asset_to_rebalance_percentage = 0
 total_target_percentage = 0
 target_amount_in_usd    = 0
-action_to_market        = dict()
 
 if log_min == False:
     print("#########################################################################################################################")
@@ -115,6 +119,8 @@ if log_min == False:
     print()
 else:
     print("Ratio:", end = ' "')
+
+
 
 for balance in balances:
     asset_currency          = balance['currency_code']
@@ -310,7 +316,7 @@ if my_action == "apply" or my_action == "testapply":
                         print(" # OK", end = '')
 
             else:
-                print(" # ERROR: LotSize: (" + str(buy_asset_amount_exacto) + " < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
+                print(" # ERROR: LotSize: (" + str(buy_asset_amount_exacto)+ " (" + str(buy_asset_amount) + " w/precision) < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
 
             print()
 
