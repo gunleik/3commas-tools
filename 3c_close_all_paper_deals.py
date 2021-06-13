@@ -101,16 +101,24 @@ for account in accounts:
     this_bot_reserved_sum = 0
     
     for deal in deals_sorted:
+        #pprint(deal)
         if deal['finished?'] == False:
             print("ID: " + str(deal['id']) + " # Start: " + str(deal['created_at']) + " # Stop: " + str(deal['closed_at']), end = '')
             try:
-                erroronclose, dealtoclose = p3cw.request(
-                    entity='deals',
-                    action=str(my_action),
-                    action_id=str(deal['id'])
+                errorconfirmpaper, confirmpaper = p3cw.request(
+                    entity='accounts',
+                    action=''
                 )
-                if dealtoclose['finished?'] == True:
-                    print(" # closed_with: " + str(my_action))
+                #pprint(confirmpaper)
+                for s in range(len(confirmpaper)):
+                    if confirmpaper[s]['id'] == account['id'] and confirmpaper[s]['market_code'] == 'paper_trading':
+                        erroronclose, dealtoclose = p3cw.request(
+                            entity='deals',
+                            action=str(my_action),
+                            action_id=str(deal['id'])
+                        )
+                        if dealtoclose['finished?'] == True:
+                            print(" # closed_with: " + str(my_action))
             except:
                 print(" # ERROR: " + erroronclose['msg'])
 
