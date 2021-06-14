@@ -261,7 +261,7 @@ if my_action == "apply" or my_action == "testapply":
                         print(" # OK", end = '')
 
             else:
-                print(" # ERROR: LotSize: (" + str(sell_asset_amount_exacto) + " < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
+                print(" # ERROR: LotSize: (" + str(sell_asset_amount_exacto) + " (" + str(sell_asset_amount) + " w/precision) < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
 
             print()
     
@@ -316,7 +316,7 @@ if my_action == "apply" or my_action == "testapply":
                         print(" # OK", end = '')
 
             else:
-                print(" # ERROR: LotSize: (" + str(buy_asset_amount_exacto)+ " (" + str(buy_asset_amount) + " w/precision) < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
+                print(" # ERROR: LotSize: (" + str(buy_asset_amount_exacto) + " (" + str(buy_asset_amount) + " w/precision) < " + str(conversion_info['minLotSize']) + ") or Trade: (" + str(this_amount) + " " + str(market_currency) + " < " + str(minimumTrade) + " " + str(market_currency) + ")", end = '')
 
             print()
 
