@@ -225,7 +225,7 @@ if my_action == "apply" or my_action == "testapply":
                     'pair': pair
                 }    
             )
-            precision = conversion_info['minLotSize'].find('1') - conversion_info['minLotSize'].find('.')
+            precision = conversion_info['minLotSize'].find('1') - conversion_info['minLotSize'].find('.') + 1
             sell_asset_amount_exacto = float(this_amount) / float(conversion_info['bid'])
             sell_asset_amount        = float(round(sell_asset_amount_exacto, precision))
             print("    Sell: ", end = '')
@@ -279,7 +279,7 @@ if my_action == "apply" or my_action == "testapply":
                     'pair': pair
                 }    
             )
-            precision = conversion_info['minLotSize'].find('1') - conversion_info['minLotSize'].find('.')
+            precision = conversion_info['minLotSize'].find('1') - conversion_info['minLotSize'].find('.') + 1
             #buy_asset_amount = float(round((float(this_amount) / float(conversion_info['ask'])), precision))
             buy_asset_amount_exacto = float(this_amount) / float(conversion_info['ask'])
             buy_asset_amount        = float(round(buy_asset_amount_exacto, precision))
