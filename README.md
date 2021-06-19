@@ -93,7 +93,7 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ## Nice to know
 * In 3c-bot-stats: "Stop: None" means that this is an active deal.
 * The use of paper account or real account is set globally on you account, so to use this scripts on paper account, go to 3commas web console and click paper account there. Then the script will automatically use the paper account and vice versa.
-* 3c_account_adjustment will generate ini-files in your home directory that is compatible with the 3c_account_rebalancing script.
+* 3c_account_adjustment will generate ini-files in your home directory with the name 3c_account_adjustedrebalancing_ACCOUNT.ini that is compatible with the 3c_account_rebalancing script.
 
 ## Changelog
 * 2021-06-19: added 3c_account_adjustment script
