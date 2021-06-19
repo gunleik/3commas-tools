@@ -19,10 +19,12 @@ from datetime import datetime
 from pprint import pprint
 from pathlib import Path
 
-home_dir        = str(Path.home())
-inifile         = "3c_account_adjustment_default.ini"
-my_action       = "testapply"
-log_min         = False
+home_dir             = str(Path.home())
+inifile              = "3c_account_adjustment_default.ini"
+my_action            = "testapply"
+my_autoall           = ""
+log_min              = False
+bullish_level_auto   = ""
 
 arguments   = len(sys.argv) - 1
 if arguments > 0:
@@ -31,18 +33,29 @@ if arguments > 0:
             inifile  = this_argument
         if this_argument == "apply" or this_argument == "testapply":
             my_action = this_argument
+        if this_argument == "all":
+            my_autoall = this_argument
+        if my_autoall == 'all':
+            try:
+                tmp = int(this_argument)
+                bullish_level_auto = this_argument
+            except:
+                tmp = 'do nothing'
+
         if this_argument == "--help":
             print()
-            print("Usage: ./3c_account_adjustment.sh [my_settings.ini] [apply|testapply]")
+            print("Usage: ./3c_account_adjustment.sh [my_settings.ini] [all NN] [apply|testapply]")
             print()
             print("Default settings found in 3c_account_adjustment_default.ini")
             print()
             print("optional arguments:")
             print("    apply,               apply rebalance with the settings generated")
             print("    testapply, (default) do a dryrun of the apply to check for error messages")
+            print("    all NN,              skip asking for how bullish and set it automatically to integer number NN")
             print("    my_settings.ini,     alternative settings file")
             print()
             sys.exit()
+
 
 
 config = configparser.ConfigParser()
@@ -91,17 +104,20 @@ for account_id in account_ids:
             print("Use --help for list of arguments.")
             sys.exit()
 
-    print()
-    print("#########################################################################################################################")
-    print("#########################################################################################################################")
-    print("Account: " + str(account_id))
-    print("How bullish are you today for account: " + str(account_id) + "?")
-    print("    0   = polarbearish, keep all your funds in the market currency")
-    print("    30  = bearish,     put 30% of your funds in crypto, around 70% kept in market currency")
-    print("    70  = bullish,     put 70% of your funds in crypto, around 30% kept in market currency")
-    print("    100 = bulls-on-paradeish, all-in on crypto (fund errors might occur because of rounding, better use 99)")
-    print("    *   = enter or anything other than 0-100 will skip this account and keep current levels")
-    bullish_level = input("So how bullish are you today for account: " + str(account_id) + "? (0-100): ")
+    if bullish_level_auto != "":
+        bullish_level = bullish_level_auto
+    else:
+        print()
+        print("#########################################################################################################################")
+        print("#########################################################################################################################")
+        print("Account: " + str(account_id))
+        print("How bullish are you today for account: " + str(account_id) + "?")
+        print("    0   = polarbearish, keep all your funds in the market currency")
+        print("    30  = bearish,     put 30% of your funds in crypto, around 70% kept in market currency")
+        print("    70  = bullish,     put 70% of your funds in crypto, around 30% kept in market currency")
+        print("    100 = bulls-on-paradeish, all-in on crypto (fund errors might occur because of rounding, better use 99)")
+        print("    *   = enter or anything other than 0-100 will skip this account and keep current levels")
+        bullish_level = input("So how bullish are you today for account: " + str(account_id) + "? (0-100): ")
 
 
     try:
