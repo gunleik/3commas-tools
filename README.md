@@ -63,6 +63,7 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ./3c_account_adjustment.sh                # Rebalance a 3commas connected account with settings found in 3c_account_adjustment_default.ini
 ./3c_account_adjustment.sh apply          # Apply rebalance settings found in the ini-file
 ./3c_account_adjustment.sh testapply      # Do a dryrun of the apply to check for error messages (default)
+./3c_account_adjustment.sh all NN         # Do not ask for bullish level, automatically apply the level from the integer NN (need apply to commit)
 ./3c_account_adjustment.sh ~/3c_account_adjustment_othersettings.ini  # alternative settings file
 
 # 3c_close_all_paper_deals close all paper deals:
