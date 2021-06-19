@@ -35,7 +35,7 @@ if arguments > 0:
             print()
             print("Usage: ./3c_account_adjustment.sh [my_settings.ini] [apply|testapply]")
             print()
-            print("Default settings found in 3c_account_rebalancing_default.ini")
+            print("Default settings found in 3c_account_adjustment_default.ini")
             print()
             print("optional arguments:")
             print("    apply,               apply rebalance with the settings generated")
