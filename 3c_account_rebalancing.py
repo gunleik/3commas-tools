@@ -168,7 +168,8 @@ for balance in balances:
                 print('%-8s' % str(asset_currency + ":") + '%11s' % str(format(asset_amount_in_asset, '.4f')), end = ' ')
                 print("# USD:" + '%10s' % str("$" + format(asset_amount_in_usd, '.2f')), end = ' ')
                 print("# Ratio:" + '%6s' % str(asset_amount_percent), end = '% ')
-                print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + " ($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
+                #print("# pref:" + '%4s' % str(asset_target_percent_min) + "-" + '%-4s' % str(asset_target_percent_max) + " ($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
+                print("# pref:" + '%5s' % str(asset_target_percent) + " (+/-" + '%-3s' % str(allowed_deviation) + "%) ($" + '%9s' % str(format(target_amount_in_usd, '.2f')) + ")", end = ' ')
                 print("# Action: " + '%6s' % balance_action, end = ' ')
                 print("# Amount: $" + str(format(dev_amount_in_usd, '.2f')))
             else:
