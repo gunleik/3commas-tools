@@ -5,6 +5,7 @@
 <p>3c_use_account: change between paper and real account to use with 3c_bot_stats.</p>
 <p>3c_close_all_paper_deals: cancel or sell all deals in the paper account to get a fresh start with 3c_bot_stats.</p>
 <p>3c_account_rebalancing: rebalance any 3commas connected account.</p>
+<p>3c_account_adjustment: how bullish are you today? Script to quickly adjust rebalancing. If set in ini-file that you want 60% BTC and 40% ETH and when running the script you say you are 50% bullish, the account(s) will be adjusted so that BTC get 30% (60% of 50%) and ETH get 20% (40% of 50%) of you account total value. The market currency will have 50% of you account value.</p>
 <p>3c_account_stats: show list of your accounts and their USD value.</p>
 <p>These scripts is a total hack and comes with no warranties. Python is not my primary language either, but I start to like it. If you have improvements please submit them :-)</p>
 
@@ -58,6 +59,13 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ./3c_account_rebalancing.sh testapply      # Do a dryrun of the apply to check for error messages
 ./3c_account_rebalancing.sh 3c_account_rebalancing_othersettings.ini  # alternative settings file, so the script can be run for different accounts
 
+# 3c_account_adjustment adjust rebalance on any 3commas connected account:
+./3c_account_adjustment.sh                # Rebalance a 3commas connected account with settings found in 3c_account_adjustment_default.ini
+./3c_account_adjustment.sh apply          # Apply rebalance settings found in the ini-file
+./3c_account_adjustment.sh testapply      # Do a dryrun of the apply to check for error messages (default)
+./3c_account_adjustment.sh all NN         # Do not ask for bullish level, automatically apply the level from the integer NN (need apply to commit)
+./3c_account_adjustment.sh ~/3c_account_adjustment_othersettings.ini  # alternative settings file
+
 # 3c_close_all_paper_deals close all paper deals:
 ./3c_close_all_paper_deals.sh cancel       # Cancel all paper deals (leave them in the current asset)
 ./3c_close_all_paper_deals.sh panic_sell   # "Close at market price" for all paper deals (sell back to the original asset)
@@ -86,8 +94,10 @@ If you like to change the API key/secret or wipe it from you system, just delete
 ## Nice to know
 * In 3c-bot-stats: "Stop: None" means that this is an active deal.
 * The use of paper account or real account is set globally on you account, so to use this scripts on paper account, go to 3commas web console and click paper account there. Then the script will automatically use the paper account and vice versa.
+* 3c_account_adjustment will generate ini-files in your home directory with the name 3c_account_adjustedrebalancing_ACCOUNT.ini that is compatible with the 3c_account_rebalancing script.
 
 ## Changelog
+* 2021-06-19: added 3c_account_adjustment script
 * 2021-06-13: paper close script; confirm the deal is paper before closing
 * 2021-06-13: rebalancing script; if asset is not already in your wallet the script will now do the initial buy of it
 * 2021-06-13: readme; removed windows binary, this will not be updated... please install python and run from command line
