@@ -2,7 +2,7 @@
 
 if [ -f "$HOME/.3c_keys" ]; then
 	source $HOME/.3c_keys
-	python3 3c_account_adjustment.py $1 $2 $3 $4
+	python3 3c_account_adjustment.py $1 $2 $3 $4 $5
 else
 	echo "If not done already, you have to create an API key at https://3commas.io/api_access_tokens"
 	echo "It needs minimum \"Account Read\", \"SmartTradesRead\" and \"SmartTradesWrite\" access"
@@ -22,5 +22,5 @@ else
 	echo "export threecommas_secret=\"$threecommasapirwsecret\"" >>$HOME/.3c_keys
 
 	source $HOME/.3c_keys
-	python3 3c_account_adjustment.py $1 $2 $3 $4
+	python3 3c_account_adjustment.py $1 $2 $3 $4 $5
 fi

@@ -25,6 +25,7 @@ my_action            = "testapply"
 my_autoall           = ""
 log_min              = False
 bullish_level_auto   = ""
+my_minimal           = ""
 
 arguments   = len(sys.argv) - 1
 if arguments > 0:
@@ -35,6 +36,8 @@ if arguments > 0:
             my_action = this_argument
         if this_argument == "all":
             my_autoall = this_argument
+        if this_argument == "minimal":
+            my_minimal = "minimal"
         if my_autoall == 'all':
             try:
                 tmp = int(this_argument)
@@ -52,6 +55,7 @@ if arguments > 0:
             print("    apply,               apply rebalance with the settings generated")
             print("    testapply, (default) do a dryrun of the apply to check for error messages")
             print("    all NN,              skip asking for how bullish and set it automatically to integer number NN")
+            print("    minimal,             show minimal output")
             print("    my_settings.ini,     alternative settings file")
             print()
             sys.exit()
@@ -153,7 +157,7 @@ for account_id in account_ids:
             f.close()
 
             if my_action == 'apply' or my_action == 'testapply':
-                os.system('python3 3c_account_rebalancing.py ' + home_dir + '/3c_account_adjustedrebalancing_' + str(account_id) + '.ini ' + my_action)
+                os.system('python3 3c_account_rebalancing.py ' + home_dir + '/3c_account_adjustedrebalancing_' + str(account_id) + '.ini ' + my_action + " " + my_minimal)
         else:
             print()
             print("###########################################")
