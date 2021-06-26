@@ -229,7 +229,13 @@ if my_action == "apply" or my_action == "testapply":
             precision = conversion_info['minLotSize'].find('1') - conversion_info['minLotSize'].find('.') + 1
             sell_asset_amount_exacto = float(this_amount) / float(conversion_info['bid'])
             sell_asset_amount        = float(round(sell_asset_amount_exacto, precision))
-            print("    Sell: ", end = '')
+
+            now = datetime.now()
+            print(now.strftime("%Y-%m-%d %H:%M:%S"), end = ' # ')
+
+            print("trade", end = ' # ')
+            print(my_action, end = ' # ')
+            print("Sell", end = ' # ')
             print(str(this_asset), end = ' ')
             print(sell_asset_amount, end = '')
 
@@ -260,6 +266,7 @@ if my_action == "apply" or my_action == "testapply":
                         print(" # EXCH_ERROR: " + error['msg'], end = '')
                     except:
                         print(" @ " + str(smart_trade_sell['position']['price']['value']), end = '')
+                        print(" = " + str(smart_trade_sell['position']['total']['value']), end = '')
                         print(" # OK", end = '')
 
             else:
@@ -285,7 +292,13 @@ if my_action == "apply" or my_action == "testapply":
             #buy_asset_amount = float(round((float(this_amount) / float(conversion_info['ask'])), precision))
             buy_asset_amount_exacto = float(this_amount) / float(conversion_info['ask'])
             buy_asset_amount        = float(round(buy_asset_amount_exacto, precision))
-            print("    Buy : ", end = '')
+
+            now = datetime.now()
+            print(now.strftime("%Y-%m-%d %H:%M:%S"), end = ' # ')
+
+            print("trade", end = ' # ')
+            print(my_action, end = ' # ')
+            print("Buy", end = ' # ')
             print(str(this_asset), end = ' ')
             print(buy_asset_amount, end = '')
 
@@ -316,6 +329,7 @@ if my_action == "apply" or my_action == "testapply":
                         print(" # EXCH_ERROR: " + error['msg'], end = '')
                     except:
                         print(" @ " + str(smart_trade_buy['position']['price']['value']), end = '')
+                        print(" = " + str(smart_trade_buy['position']['total']['value']), end = '')
                         print(" # OK", end = '')
 
             else:
